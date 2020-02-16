@@ -3,7 +3,7 @@ let express = require("express");
 
 // import body-parser
 let bodyParser = require("body-parser");
-
+let cors = require("cors");
 // port
 var port = process.env.PORT || 8080;
 
@@ -18,6 +18,7 @@ let app = express();
 // body-parser to handle post request
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
+app.use(cors());
 
 // api route middleware
 app.use("/api", apiRoutes);

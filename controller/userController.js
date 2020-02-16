@@ -7,7 +7,7 @@ exports.login = function(req, res) {
   // });
 
   User.find(
-    { name: req.body.name, password: req.body.password },
+    { email: req.body.email, password: req.body.password },
     (error, user) => {
       if (error) {
         res.json({
