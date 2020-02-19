@@ -2,33 +2,44 @@ var EventRegistration = require("../model/eventRegistration");
 
 exports.register = (req, res) => {
   var eventRegistration = new EventRegistration();
+  console.log(" the response from server is ", req.body.eventForm);
+  console.log(" the response from server is ", req.files.image.data);
 
-  (eventRegistration.eventTitle = req.body.eventTitle),
-    (eventRegistration.eventLocation = req.body.eventLocation),
-    (eventRegistration.country = req.body.country),
-    (eventRegistration.region = req.body.region),
-    (eventRegistration.city = req.body.city),
-    (eventRegistration.scheduleOption = req.body.scheduleOption),
-    (eventRegistration.eventDate = req.body.eventDate),
-    (eventRegistration.eventFrom = req.body.eventFrom),
-    (eventRegistration.eventTo = req.body.eventTo),
-    (eventRegistration.eventImage = req.body.image),
-    (eventRegistration.eventDescription = req.body.eventDescription),
-    (eventRegistration.organizerName = req.body.organizerName),
-    (eventRegistration.organizerDescription = req.body.organizerDescription),
-    (eventRegistration.ticketType = req.body.ticketType),
-    (eventRegistration.ticketName = req.body.ticketName),
-    (eventRegistration.ticketPrice = req.body.ticketPrice),
-    (eventRegistration.ticketDescription = req.body.ticketSalesStartTime),
-    (eventRegistration.ticketSalesStartTime = req.body.ticketSalesStartTime),
-    (eventRegistration.ticketSalesStartTime = req.body.ticketSalesStartTime),
-    (eventRegistration.ticketSalesStartTime = req.body.ticketSalesStartTime),
-    (eventRegistration.ticketSalesStartTime = req.body.ticketSalesStartTime),
-    (eventRegistration.ticketSalesStartDate = req.body.ticketSalesStartDate),
-    (eventRegistration.ticketSalesEndTime = req.body.ticketSalesEndTime),
-    (eventRegistration.ticketSalesEndtDate = req.body.ticketSalesEndtDate),
-    (eventRegistration.eventType = req.body.eventType),
-    (eventRegistration.eventTopic = req.body.eventTopic);
+  (eventRegistration.eventTitle = req.body.eventForm.eventTitle),
+    (eventRegistration.eventLocation = req.body.eventForm.eventLocation),
+    (eventRegistration.country = req.body.eventForm.country),
+    (eventRegistration.region = req.body.eventForm.region),
+    (eventRegistration.city = req.body.eventForm.city),
+    (eventRegistration.scheduleOption = req.body.eventForm.scheduleOption),
+    (eventRegistration.eventDate = req.body.eventForm.eventDate),
+    (eventRegistration.eventFrom = req.body.eventForm.eventFrom),
+    (eventRegistration.eventTo = req.body.eventForm.eventTo),
+    (eventRegistration.eventImage = req.files.image.name),
+    (eventRegistration.eventDescription = req.body.eventForm.eventDescription),
+    (eventRegistration.organizerName = req.body.eventForm.organizerName),
+    (eventRegistration.organizerDescription =
+      req.body.eventForm.organizerDescription),
+    (eventRegistration.ticketType = req.body.eventForm.ticketType),
+    (eventRegistration.ticketName = req.body.eventForm.ticketName),
+    (eventRegistration.ticketPrice = req.body.eventForm.ticketPrice),
+    (eventRegistration.ticketDescription =
+      req.body.eventForm.ticketSalesStartTime),
+    (eventRegistration.ticketSalesStartTime =
+      req.body.eventForm.ticketSalesStartTime),
+    (eventRegistration.ticketSalesStartTime =
+      req.body.eventForm.ticketSalesStartTime),
+    (eventRegistration.ticketSalesStartTime =
+      req.body.eventForm.ticketSalesStartTime),
+    (eventRegistration.ticketSalesStartTime =
+      req.body.eventForm.ticketSalesStartTime),
+    (eventRegistration.ticketSalesStartDate =
+      req.body.eventForm.ticketSalesStartDate),
+    (eventRegistration.ticketSalesEndTime =
+      req.body.eventForm.ticketSalesEndTime),
+    (eventRegistration.ticketSalesEndtDate =
+      req.body.eventForm.ticketSalesEndtDate),
+    (eventRegistration.eventType = req.body.eventForm.eventType),
+    (eventRegistration.eventTopic = req.body.eventForm.eventTopic);
 
   eventRegistration.save(error => {
     if (error) {
@@ -38,6 +49,25 @@ exports.register = (req, res) => {
         message: "Event registered successfully",
         data: eventRegistration
       });
+    }
+  });
+};
+
+exports.getEvent = (req, res) => {
+  EventRegistration.find((error, event) => {
+    if (error) {
+      res.json({
+        status: "error",
+        message: "error"
+      });
+    } else {
+      if (event.length >= 1) {
+        res.json({
+          status: "success",
+          message: "events retrieved successfully",
+          data: event
+        });
+      }
     }
   });
 };

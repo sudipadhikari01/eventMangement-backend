@@ -3,8 +3,8 @@ var mongoose = require("mongoose");
 var Schema = mongoose.Schema;
 
 var eventRegistrationSchema = new Schema({
-  eventTitle: { type: String, required: true },
-  eventLocation: { type: String, required: true },
+  eventTitle: { type: String },
+  eventLocation: { type: String },
   country: { type: String },
   region: { type: String },
   city: { type: String },

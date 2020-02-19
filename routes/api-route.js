@@ -12,5 +12,6 @@ router.get("/", function(req, res) {
 router.route("/login").post(UserController.login);
 router.route("/register").post(UserController.register);
 router.route("/event-registration").post(EventRegistrationController.register);
+router.route("/event-registration").get(EventRegistrationController.getEvent);
 
 module.exports = router;

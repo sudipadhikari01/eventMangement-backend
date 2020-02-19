@@ -12,6 +12,9 @@ let apiRoutes = require("./routes/api-route");
 // // import db connection
 let dbConnection = require("./services/db-connection");
 
+//fileupload
+const fileUpload = require("express-fileupload");
+
 // initialize express
 let app = express();
 
@@ -19,9 +22,11 @@ let app = express();
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 app.use(cors());
-
+app.use(fileUpload());
 // api route middleware
 app.use("/api", apiRoutes);
+
+//
 
 // index page
 app.get("/", (req, res) => {
