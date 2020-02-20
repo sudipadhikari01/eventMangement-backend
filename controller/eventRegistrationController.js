@@ -3,7 +3,7 @@ var EventRegistration = require("../model/eventRegistration");
 exports.register = (req, res) => {
   var eventRegistration = new EventRegistration();
   console.log(" the response from server is ", req.body.eventForm);
-  console.log(" the response from server is ", req.files.image.data);
+  console.log(" the response from server is ", req.files.eventImage.name);
 
   (eventRegistration.eventTitle = req.body.eventForm.eventTitle),
     (eventRegistration.eventLocation = req.body.eventForm.eventLocation),
@@ -14,7 +14,7 @@ exports.register = (req, res) => {
     (eventRegistration.eventDate = req.body.eventForm.eventDate),
     (eventRegistration.eventFrom = req.body.eventForm.eventFrom),
     (eventRegistration.eventTo = req.body.eventForm.eventTo),
-    (eventRegistration.eventImage = req.files.image.name),
+    (eventRegistration.eventImage = req.files.eventImage.name),
     (eventRegistration.eventDescription = req.body.eventForm.eventDescription),
     (eventRegistration.organizerName = req.body.eventForm.organizerName),
     (eventRegistration.organizerDescription =
