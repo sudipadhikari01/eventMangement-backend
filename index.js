@@ -7,16 +7,15 @@ let cors = require("cors");
 // port
 var port = process.env.PORT || 8080;
 
+//fileupload
+const fileupload = require("express-fileupload");
 // multer
-const multer = require("multer");
-const upload = multer();
 
 // api routes
 let apiRoutes = require("./routes/api-route");
 // // import db connection
 let dbConnection = require("./services/db-connection");
 
-//fileupload
 // initialize express
 let app = express();
 
@@ -24,6 +23,7 @@ let app = express();
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(cors());
+// app.use(fileupload);
 // app.use(upload.array());
 app.use(express.static(__dirname + "/public"));
 // api route middleware

@@ -18,7 +18,9 @@ router.route("/register").post(UserController.register);
 
 // evenregistration post route
 router.post("/event-registration", upload.single("eventImage"), (req, res) => {
-  // console.log(req.body.eventForm.eventTitle);
+  console.log("Event title is " + req.body.eventForm.eventTitle);
+  console.log("hello testing");
+  console.log("Event image  is " + req.file.filename);
 
   const url = req.protocol + ":" + req.get("host") + "/public/images/";
   // var eventRegistration = new EventRegistration();
