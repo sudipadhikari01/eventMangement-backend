@@ -12,6 +12,8 @@ const storage = multer.diskStorage({
   }
 });
 
-const upload = multer({ storage });
+var upload = multer({ storage: storage }).single("eventImage");
+
+// const upload = multer({ storage });
 
 module.exports = upload;

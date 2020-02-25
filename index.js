@@ -20,14 +20,15 @@ let dbConnection = require("./services/db-connection");
 let app = express();
 
 // body-parser to handle post request
-app.use(bodyParser.json());
+
 app.use(bodyParser.urlencoded({ extended: true }));
+app.use(bodyParser.json());
 app.use(cors());
+app.use("/api", apiRoutes);
 // app.use(fileupload);
 // app.use(upload.array());
 app.use(express.static(__dirname + "/public"));
 // api route middleware
-app.use("/api", apiRoutes);
 
 //
 

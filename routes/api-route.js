@@ -17,10 +17,17 @@ router.route("/login").post(UserController.login);
 router.route("/register").post(UserController.register);
 
 // evenregistration post route
-router.post("/event-registration", upload.single("eventImage"), (req, res) => {
-  console.log("Event title is " + req.body.eventForm.eventTitle);
+router.post("/event-registration", (req, res) => {
   console.log("hello testing");
-  console.log("Event image  is " + req.file.filename);
+  upload(req, res, function(error) {
+    if (!error) {
+      console.log("Event title is ", req.body.eventForm.eventTitle);
+      console.log("files is ", req.file.filename);
+    } else {
+      console.log("Error:", error);
+    }
+  });
+  // console.log("Event image  is " + req.file.filename);
 
   const url = req.protocol + ":" + req.get("host") + "/public/images/";
   // var eventRegistration = new EventRegistration();
