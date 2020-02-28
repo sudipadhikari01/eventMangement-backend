@@ -12,7 +12,7 @@ const storage = multer.diskStorage({
   }
 });
 
-var upload = multer({ storage: storage }).single("eventImage");
+var upload = multer({ storage: storage }).array("eventImage");
 
 // const upload = multer({ storage });
 

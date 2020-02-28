@@ -1,4 +1,5 @@
 let router = require("express").Router();
+
 // import User controller
 var UserController = require("../controller/userController");
 var EventRegistrationController = require("../controller/eventRegistrationController");
@@ -16,67 +17,25 @@ router.get("/", function(req, res) {
 router.route("/login").post(UserController.login);
 router.route("/register").post(UserController.register);
 
-// evenregistration post route
-router.post("/event-registration", (req, res) => {
-  console.log("hello testing");
-  upload(req, res, function(error) {
-    if (!error) {
-      console.log("Event title is ", req.body.eventForm.eventTitle);
-      console.log("files is ", req.file.filename);
+// handling the image
+router.post("/event-registration/image", (req, res) => {
+  upload(req, res, function(err) {
+    if (err) {
+      res.json(error);
     } else {
-      console.log("Error:", error);
+      console.log("req", req.files);
+      res.json({
+        message: "Image uploaded successfully",
+        status: "success",
+        data: req.files[0].filename
+      });
     }
   });
-  // console.log("Event image  is " + req.file.filename);
 
-  const url = req.protocol + ":" + req.get("host") + "/public/images/";
-  // var eventRegistration = new EventRegistration();
-  // (eventRegistration.eventTitle = req.body.eventForm.eventTitle),
-  //   (eventRegistration.eventLocation = req.body.eventForm.eventLocation),
-  //   (eventRegistration.country = req.body.eventForm.country),
-  //   (eventRegistration.region = req.body.eventForm.region),
-  //   (eventRegistration.city = req.body.eventForm.city),
-  //   (eventRegistration.scheduleOption = req.body.eventForm.scheduleOption),
-  //   (eventRegistration.eventDate = req.body.eventForm.eventDate),
-  //   (eventRegistration.eventFrom = req.body.eventForm.eventFrom),
-  //   (eventRegistration.eventTo = req.body.eventForm.eventTo),
-  //   (eventRegistration.eventImage = url + req.file.filename),
-  //   (eventRegistration.eventDescription = req.body.eventForm.eventDescription),
-  //   (eventRegistration.organizerName = req.body.eventForm.organizerName),
-  //   (eventRegistration.organizerDescription =
-  //     req.body.eventForm.organizerDescription),
-  //   (eventRegistration.ticketType = req.body.eventForm.ticketType),
-  //   (eventRegistration.ticketName = req.body.eventForm.ticketName),
-  //   (eventRegistration.ticketPrice = req.body.eventForm.ticketPrice),
-  //   (eventRegistration.ticketDescription =
-  //     req.body.eventForm.ticketSalesStartTime),
-  //   (eventRegistration.ticketSalesStartTime =
-  //     req.body.eventForm.ticketSalesStartTime),
-  //   (eventRegistration.ticketSalesStartTime =
-  //     req.body.eventForm.ticketSalesStartTime),
-  //   (eventRegistration.ticketSalesStartTime =
-  //     req.body.eventForm.ticketSalesStartTime),
-  //   (eventRegistration.ticketSalesStartTime =
-  //     req.body.eventForm.ticketSalesStartTime),
-  //   (eventRegistration.ticketSalesStartDate =
-  //     req.body.eventForm.ticketSalesStartDate),
-  //   (eventRegistration.ticketSalesEndTime =
-  //     req.body.eventForm.ticketSalesEndTime),
-  //   (eventRegistration.ticketSalesEndtDate =
-  //     req.body.eventForm.ticketSalesEndtDate),
-  //   (eventRegistration.eventType = req.body.eventForm.eventType),
-  //   (eventRegistration.eventTopic = req.body.eventForm.eventTopic);
-
-  // eventRegistration.save(error => {
-  //   if (error) {
-  //     res.json(error);
-  //   } else {
-  //     res.json({
-  //       message: "Event registered successfully",
-  //       data: eventRegistration
-  //     });
-  //   }
-  // });
+  // evenregistration post route
+  router
+    .route("/event-registration")
+    .post(EventRegistrationController.register);
 });
 
 router.route("/event-registration").get(EventRegistrationController.getEvent);

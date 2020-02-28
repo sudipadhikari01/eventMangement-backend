@@ -7,9 +7,7 @@ let cors = require("cors");
 // port
 var port = process.env.PORT || 8080;
 
-//fileupload
-const fileupload = require("express-fileupload");
-// multer
+const path = require("path");
 
 // api routes
 let apiRoutes = require("./routes/api-route");
@@ -25,9 +23,7 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 app.use(cors());
 app.use("/api", apiRoutes);
-// app.use(fileupload);
-// app.use(upload.array());
-app.use(express.static(__dirname + "/public"));
+app.use("/public", express.static(path.join(__dirname, "public")));
 // api route middleware
 
 //
