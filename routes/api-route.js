@@ -31,12 +31,9 @@ router.post("/event-registration/image", (req, res) => {
       });
     }
   });
-
-  // evenregistration post route
-  router
-    .route("/event-registration")
-    .post(EventRegistrationController.register);
 });
+// evenregistration post route
+router.route("/event-registration").post(EventRegistrationController.register);
 
 router.route("/event-registration").get(EventRegistrationController.getEvent);
 

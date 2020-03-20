@@ -51,20 +51,22 @@ exports.register = (req, res) => {
 };
 
 exports.getEvent = (req, res) => {
-  EventRegistration.find((error, event) => {
-    if (error) {
-      res.json({
-        status: "error",
-        message: "error"
-      });
-    } else {
-      if (event.length >= 1) {
+  EventRegistration.find({})
+    .sort({ createdAt: -1 })
+    .exec((error, event) => {
+      if (error) {
         res.json({
-          status: "success",
-          message: "events retrieved successfully",
-          data: event
+          status: "error",
+          message: "error"
         });
+      } else {
+        if (event.length >= 1) {
+          res.json({
+            status: "success",
+            message: "events retrieved successfully",
+            data: event
+          });
+        }
       }
-    }
-  });
+    });
 };
